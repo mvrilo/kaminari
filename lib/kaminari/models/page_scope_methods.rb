@@ -20,8 +20,8 @@ module Kaminari
     end
 
     # Total number of pages
-    def total_pages
-      count_without_padding = total_count
+    def total_pages(column_name = :all)
+      count_without_padding = total_count(column_name)
       count_without_padding -= @_padding if defined?(@_padding) && @_padding
       count_without_padding = 0 if count_without_padding < 0
 
