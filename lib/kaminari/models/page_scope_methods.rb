@@ -19,9 +19,12 @@ module Kaminari
       offset(offset_value + num.to_i)
     end
 
-    # Total number of pages
-    def total_pages(column_name = :all)
-      count_without_padding = total_count(column_name)
+    # Total number of pages - first argument can be
+    # used as the column name for the count operation
+    def total_pages(*args)
+      count_without_padding = total_count if args.empty?
+      count_without_padding ||= total_count(args.first)
+
       count_without_padding -= @_padding if defined?(@_padding) && @_padding
       count_without_padding = 0 if count_without_padding < 0
 
